@@ -18,6 +18,8 @@ If this isn't done correctly, the browsers won't run.
 
 Currently, this project is only tested on Windows 10. I have not tried testing this through any other operating system just yet, so I can't guarantee that the other web drivers will work. I will test on a Mac once I finish getting core functionality developed. 
 
+There are also problems with running the Gecko Driver. It's able to be run, but no commands seem to be getting through besides start-firefox and quit.
+
 ## License
 
 Copyright © 2017 Paul Nguyen
