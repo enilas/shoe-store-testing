@@ -37,6 +37,23 @@
     (for [price shoe-prices]
       (element/get-text price))))
 
+(defn submit-email-inputs
+  "Inputs notification_email_input text boxes."
+  [month]
+  (let [email-amounts (count (browser/find-elements-by-class-name "notification_email_input"))]
+    ;; Testing to check if email input fields are available in each result.
+    (is (= email-amounts (count (browser/find-elements-by-class-name "shoe_result"))) "Email input field missing from at least one result.")
+    ;; Testing to check if each email input field works.
+    (for [index (range email-amounts)]
+      (do (let [input (nth (browser/find-elements-by-class-name "notification_email_input") index)]
+            (element/send-keys input "paulng91@gmail.com")
+            (element/submit input)
+            (wait/instance 10)
+            (let [notice (browser/find-element-by-class-name "notice")]
+              (is (= (element/get-text notice) "Thanks! We will notify you when this shoe is available at this email: paulng91@gmail.com"))
+              (Thread/sleep 1000)
+              (browser/get (str "http://shoestore-manheim.rhcloud.com/months/" month))))))))
+
 (defn test-display
   "Tests the display of each shoe result."
   []
@@ -79,14 +96,11 @@
     (wait/instance 10)
     (test-display)))
 
-(deftest january-email-test
-  (testing "Should receive successful message when e-mail is submitted."))
-
 (deftest january-browser-test
   (testing "Testing browser compatibility for January."
     (let [_ (chrome/start-chrome)]
       (january-display-test)
-      (chrome/quit))))
+      (submit-email-inputs "january"))))
 
 
 (defn february-display-test
@@ -96,12 +110,20 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn march-display-test
   []
   (testing "Should return Description, Picture, and Pricing for March."
     (browser/get "http://shoestore-manheim.rhcloud.com/months/march")
     (wait/instance 10)
     (test-display)))
+
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
 
 (defn april-display-test
   []
@@ -110,12 +132,20 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn may-display-test
   []
   (testing "Should return Description, Picture, and Pricing for May."
     (browser/get "http://shoestore-manheim.rhcloud.com/months/may")
     (wait/instance 10)
     (test-display)))
+
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
 
 (defn june-display-test
   []
@@ -124,12 +154,20 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn july-display-test
   []
   (testing "Should return Description, Picture, and Pricing for July."
     (browser/get "http://shoestore-manheim.rhcloud.com/months/july")
     (wait/instance 10)
     (test-display)))
+
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
 
 (defn august-display-test
   []
@@ -138,12 +176,20 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn september-display-test
   []
   (testing "Should return Description, Picture, and Pricing for September."
     (browser/get "http://shoestore-manheim.rhcloud.com/months/september")
     (wait/instance 10)
     (test-display)))
+
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
 
 (defn october-display-test
   []
@@ -152,6 +198,10 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn november-display-test
   []
   (testing "Should return Description, Picture, and Pricing for November."
@@ -159,10 +209,17 @@
     (wait/instance 10)
     (test-display)))
 
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
+
 (defn december-display-test
   []
   (testing "Should return Description, Picture, and Pricing for December."
     (browser/get "http://shoestore-manheim.rhcloud.com/months/december")
     (wait/instance 10)
-    (test-display)
-    (browser/quit)))
+    (test-display)))
+
+(defn january-email-test
+  []
+  (testing "Should receive successful message when e-mail is submitted."))
