@@ -20,10 +20,12 @@
   (testing "Should set system properties according to OS."
     (configure (:os system-os))
     (is (not-empty (System/getProperty "webdriver.chrome.driver")) "Chrome driver not found.")
-    (is (not-empty (System/getProperty "webdriver.firefox.driver")) "Firefox driver not found.")))
+    (is (not-empty (System/getProperty "webdriver.firefox.driver")) "Firefox driver not found.")
+    (is (not-empty (System/getProperty "webdriver.gecko.driver")) "Firefox/Gecko driver not set.")))
 
 (deftest start-browser-test
   (testing "Chrome browser should launch and close appropriately."
+    (configure (:os system-os))
     (chrome/start-chrome)
     (wait/instance 10)
     (is (not (nil? (browser/instance))))

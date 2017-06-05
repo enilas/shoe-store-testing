@@ -10,20 +10,30 @@
   ;Replace %20 with space character
   (clojure.string/replace path-url #"%20" " "))
 
+(comment TODO: webica uses webdriver.firefox.driver, while Selenium uses webdriver.gecko.driver.
+         Need to investigate the library and implement possible changes.)
+
 (defn configure
   [system-os]
   (if (= system-os :linux64)
     (do (System/setProperty "webdriver.chrome.driver"
                             (sanitize-file-location (.getPath (io/resource "linux64/chromedriver"))))
         (System/setProperty "webdriver.firefox.driver"
+                            (sanitize-file-location (.getPath (io/resource "linux64/geckodriver"))))
+        ;; gecko.driver is used in Selenium instead of firefox.driver, which is why this redundant system property is set.
+        (System/setProperty "webdriver.gecko.driver"
                             (sanitize-file-location (.getPath (io/resource "linux64/geckodriver"))))))
   (if (= system-os :win32)
     (do (System/setProperty "webdriver.chrome.driver"
                             (sanitize-file-location (.getPath (io/resource "win32/chromedriver.exe"))))
         (System/setProperty "webdriver.firefox.driver"
-                            (sanitize-file-location (.getPath (io/resource "win32/geckodriver.exe"))))))
+                            (sanitize-file-location (.getPath (io/resource "win32/geckodriver.exe"))))
+        (System/setProperty "webdriver.gecko.driver"
+                            (sanitize-file-location (.getPath (io/resource "linux64/geckodriver"))))))
   (if (= system-os :macosx)
     (do (System/setProperty "webdriver.chrome.driver"
                             (sanitize-file-location (.getPath (io/resource "macosx/chromedriver"))))
         (System/setProperty "webdriver.firefox.driver"
-                            (sanitize-file-location (.getPath (io/resource "macosx/geckodriver")))))))
+                            (sanitize-file-location (.getPath (io/resource "macosx/geckodriver"))))
+        (System/setProperty "webdriver.gecko.driver"
+                            (sanitize-file-location (.getPath (io/resource "linux64/geckodriver")))))))

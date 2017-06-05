@@ -1,6 +1,6 @@
 # shoe-store-testing
 
-This project is an automated test suite of the Manheim shoe store.
+This project is an automated test suite of the Manheim shoe store. It uses a a Clojure binding for Selenium Webdriver called [webica](https://github.com/tmarble/webica).
 
 ## Installation
 
