@@ -12,9 +12,14 @@ If this isn't done correctly, the browsers won't run.
 
 ## Usage
 
-1. To run automated tests using command prompt, run ```lein test``` in the project root directory
+To run automated tests using command prompt, run ```lein test``` in the project root directory
 
-## Possible Problems
+It's also possible to run tests for specific months through command line. Example:
+```lein test :only shoe-store-testing.core-test/november-browser-test```
+
+Just replace november with any lowercase fully spelled month, and it will work.
+
+## Possible Bugs to Fix
 
 Currently, this project is only tested on Windows 10. I have not tried testing this through any other operating system just yet, so I can't guarantee that the other web drivers will work. I will test on a Mac once I finish getting core functionality developed. 
 
